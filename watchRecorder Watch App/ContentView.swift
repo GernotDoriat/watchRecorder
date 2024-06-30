@@ -15,8 +15,8 @@ struct ContentView: View {
             Button(action: {
                 toggleRecording()
             }) {
-                Text(isRecording ? "STOP" : "START")
-                    .font(.system(size: 24, weight: .bold)) // Setzt die Schriftgröße und macht sie fett
+                Text(isRecording ? "Stop" : "Start")
+                    .font(.title)
                     .frame(maxWidth: .infinity, maxHeight: .infinity) // Füllt den verfügbaren Platz aus
                     .padding() // Fügt Padding um den Text hinzu
                     .background(isRecording ? Color.red : Color.green) // Ändert die Hintergrundfarbe je nach Zustand
