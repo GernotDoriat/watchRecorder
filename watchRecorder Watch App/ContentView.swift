@@ -5,10 +5,46 @@
 //  Created by Gernot Doriat on 29.06.24.
 //
 import SwiftUI
+import AVFoundation
+
 
 struct ContentView: View {
     @State private var isRecording = false
     @State private var timer: DispatchWorkItem?
+    
+    
+    
+    init() {
+        debugPrint("INIT")
+        AVAudioApplication.requestRecordPermission  { granted in
+            if granted {
+                debugPrint("GRANTED")
+                
+                let fileManager = FileManager.default
+                do {
+                    let directoryURL = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+                    let audioFilename = directoryURL.appendingPathComponent("recording.wav")
+                    let settings: [String: Any] = [
+                        AVFormatIDKey: kAudioFormatLinearPCM,
+                        AVSampleRateKey: 44100.0,
+                        AVNumberOfChannelsKey: 1,
+                        AVLinearPCMBitDepthKey: 16,
+                        AVLinearPCMIsFloatKey: false,
+                        AVLinearPCMIsBigEndianKey: false,
+                    ]
+                    let audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
+                    audioRecorder.record()
+                    audioRecorder.stop()
+                } catch {
+                    debugPrint("Failed to start recording: \(error)")
+                }
+        
+            }
+            else{
+                debugPrint("NOT GRANTED")
+            }
+        }
+    }
     
     var body: some View {
         VStack {
