@@ -29,7 +29,7 @@ struct ContentView: View {
     }
     
     func toggleRecording() {
-        debugPrint("toggleRecording")
+        debugPrint("toggleRecording: isRecording = \(isRecording)")
         if isRecording {
             // Stop recording and cancel the timer
             isRecording = false
