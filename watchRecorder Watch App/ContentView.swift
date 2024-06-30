@@ -8,14 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var isRecording = false
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Button(action: {
+                toggleRecording()
+            }) {
+                Text(isRecording ? "Stop Recording" : "Start Recording")
+            }
+            .background(Color.green) // Setzt die Hintergrundfarbe auf grün
+            .foregroundColor(.black)
+            .cornerRadius(30) // Optional: Fügt abgerundete Ecken hinzu
+            
+            .padding()
         }
         .padding()
+    }
+    
+    func toggleRecording() {
+        debugPrint("toggleRecording")
+      
     }
 }
 
